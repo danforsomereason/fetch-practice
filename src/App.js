@@ -16,17 +16,22 @@ function App() {
   return (
     <div className="App">
       {pokemon && (
-        <div>
-          <div>Name:</div>
-          {pokemon.name}
-          <div>Abilities:</div>
-          {pokemon.abilities.map((a) => {
-            return (<div>{a.ability.name}</div>)
-          })}
-          <div>Height:</div>
-          {pokemon.height}
-          <div>Weight:</div>
-          {pokemon.weight}
+        <div className="card">
+          <h2 className="card-title">{pokemon.name}</h2>
+          <div className="card-content">
+            <div className="card-info">
+              <p><strong>Height: </strong>{pokemon.height}</p>
+              <p><strong>Weight: </strong>{pokemon.weight}</p>
+              <div className='card-abilities'>
+                <p><strong>Abilities:</strong></p>
+                <ul>
+                  {pokemon.abilities.map((a, index) => {
+                    return <li key={index}>{a.ability.name}</li>;
+                  })}
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
