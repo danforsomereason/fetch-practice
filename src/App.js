@@ -13,21 +13,40 @@ function App() {
     })
   }, [])
   console.log(pokemon);
+
+  function getRandomMoves(moves, count = 3) {
+    const shuffled = [...moves].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count)
+  }
+
   return (
     <div className="App">
       {pokemon && (
         <div className="card">
-          <h2 className="card-title">{pokemon.name}</h2>
+          <div className='card-header'>
+            <img
+              src={pokemon.sprites.front_default}
+              alt={pokemon.name}
+              className='pokemon-thumbnail'
+            />
+            <h2 className="card-title">{pokemon.name}</h2>
+          </div>
           <div className="card-content">
             <div className="card-info">
               <p><strong>Height: </strong>{pokemon.height}</p>
               <p><strong>Weight: </strong>{pokemon.weight}</p>
               <div className='card-abilities'>
-                <p><strong>Abilities:</strong></p>
+                <p><strong>Abilities: </strong></p>
                 <ul>
                   {pokemon.abilities.map((a, index) => {
                     return <li key={index}>{a.ability.name}</li>;
                   })}
+                </ul>
+                <p><strong>Moves: </strong></p>
+                <ul>
+                  {getRandomMoves(pokemon.moves).map((move, index) => (
+                    <li key={index}>{move.move.name}</li>
+                  ))}
                 </ul>
               </div>
             </div>
